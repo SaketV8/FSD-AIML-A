@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Git Profile</title>
+  </head>
+  <body>
+    <h1>Git Profile</h1>
+    <div id="profile"></div>
+
+    <script>
+      const username = "SaketV8";
+      const url = `https://api.github.com/users/${username}`;
+
+      fetch(url)
+        .then((res) => res.json())
+        .then((data) => {
+          console.log({ data });
+          // Create an img element
+          const img = document.createElement("img");
+          img.src = data.avatar_url;
+          img.width = 200;
+          img.height = 200;
+
+          // Append it to the div with id="profile"
+          document.getElementById("profile").appendChild(img);
+
+          // Optionally display username
+          const name = document.createElement("p");
+          name.textContent = `Username: ${data.login}`;
+          document.getElementById("profile").appendChild(name);
+        })
+        .catch((err) => {
+          console.log("Error:", err.message);
+        })
+        .finally(() => {
+          console.log("Fetch operation complete");
+        });
+    </script>
+  </body>
+</html>
