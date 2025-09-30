@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <style>
+    table {
+      border-collapse: collapse; /* remove double borders */
+      width: 80%; /* optional: make table narrower */
+      margin: 20px auto; /* center table with vertical spacing */
+      font-family: Arial, sans-serif;
+    }
+
+    th,
+    td {
+      border: 1px solid #999; /* subtle border */
+      padding: 10px 15px; /* space inside cells */
+      text-align: left; /* align text to left */
+    }
+
+    th {
+      background-color: #f2f2f2; /* light gray header */
+    }
+
+    /* zebra stripes for rows */
+    /* tbody tr:nth-child(even) {
+      background-color: #ffbaba;
+    } */
+
+    /* background-color: #f9ffba; */
+    tbody tr:nth-child(odd) {
+        background-color: #fafafa;
+    }
+  </style>
+
+  <body>
+    <!-- append user data here -->
+    <table border="1">
+      <thead>
+        <tr>
+          <th>Recipe Name</th>
+          <th>Difficulty</th>
+          <th>Cuisine</th>
+          <th>Calories Per Serving</th>
+          <th>Rating</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+
+    <script>
+      const url = `https://dummyjson.com/recipes?limit=100`;
+      const getRecipeData = async () => {
+        try {
+          const response = await fetch(url);
+          const data = await response.json();
+          //   console.log(data);
+          const recipes = data.recipes;
+          recipes.forEach((recipe) => {
+
+            const row = document.createElement("tr");
+
+            // create col 1
+            // Recipe Name
+            const col1 = document.createElement("td");
+            col1.innerText = recipe.name;
+            row.appendChild(col1);
+
+            // create col 2
+            const col2 = document.createElement("td");
+            col2.innerText = recipe.difficulty;
+            row.appendChild(col2);
+
+            
+            const col3 = document.createElement("td");
+            col3.innerText = recipe.cuisine;
+            row.appendChild(col3);
+
+            const col4 = document.createElement("td");
+            col4.innerText = recipe.caloriesPerServing;
+            row.appendChild(col4);
+
+            
+            const col5 = document.createElement("td");
+            col5.innerText = recipe.rating;
+            row.appendChild(col5);
+
+            document.querySelector("tbody").appendChild(row);
+          });
+        } catch (error) {
+          console.log("ERROR: ", error.message);
+        }
+      };
+
+      getRecipeData();
+    </script>
+  </body>
+</html>

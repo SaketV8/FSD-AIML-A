@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Recipe Cart</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+      }
+
+      .container {
+        display: flex;
+        height: 100vh; /* full screen height */
+      }
+
+      /* 3/4 of screen */
+      .recipes {
+        flex: 3;
+        /* flex: 2; */
+        overflow-y: auto;
+        padding: 20px;
+      }
+
+      /* 1/4 of screen */
+      .cart {
+        flex: 1;
+        border-left: 1px solid #ccc;
+        padding: 20px;
+        background: #f9f9f9;
+        overflow-y: auto;
+      }
+
+      table {
+        border-collapse: collapse;
+        width: 100%;
+      }
+
+      th,
+      td {
+        border: 1px solid #999;
+        padding: 10px 15px;
+        text-align: left;
+      }
+
+      th {
+        background-color: #f2f2f2;
+      }
+
+      tbody tr:nth-child(odd) {
+        background-color: #fafafa;
+      }
+
+      img.thumb {
+        width: 60px;
+        height: 60px;
+        object-fit: cover;
+        border-radius: 4px;
+      }
+
+      button {
+        padding: 6px 10px;
+        border: none;
+        background: #007bff;
+        color: white;
+        cursor: pointer;
+        border-radius: 4px;
+      }
+
+      button:hover {
+        background: #0056b3;
+      }
+
+      .remove-btn {
+        background: red;
+      }
+
+      .cart h2 {
+        margin-top: 0;
+      }
+
+      .cart-item {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin: 10px 0;
+        padding: 10px;
+        border: 1px solid #ddd;
+        border-radius: 6px;
+        background: white;
+      }
+
+      .cart-item img {
+        width: 50px;
+        height: 50px;
+        object-fit: cover;
+        margin-right: 10px;
+        border-radius: 4px;
+      }
+
+      .cart-item-details {
+        flex-grow: 1;
+        margin-left: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <!-- Recipes Section -->
+      <div class="recipes">
+        <table>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Image</th>
+              <th>Recipe Name</th>
+              <th>Difficulty</th>
+              <th>Cuisine</th>
+              <th>Calories Per Serving</th>
+              <th>Rating</th>
+              <th>Price</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+
+      <div class="cart">
+        <h2>Cart</h2>
+        <div id="cart-total"><strong>Total: ₹0.00</strong></div>
+        <hr />
+        <div id="cart-items"></div>
+      </div>
+    </div>
+
+    <script>
+      const url = `https://dummyjson.com/recipes?limit=100`;
+      const cart = [];
+
+      const getRecipeData = async () => {
+        try {
+          const response = await fetch(url);
+          const data = await response.json();
+          const recipes = data.recipes;
+
+          recipes.forEach((recipe) => {
+            const row = document.createElement("tr");
+
+            // Recipe ID
+            const col0 = document.createElement("td");
+            col0.innerText = recipe.id;
+            row.appendChild(col0);
+
+            // Image
+            const imgCol = document.createElement("td");
+            const img = document.createElement("img");
+            img.src = `https://picsum.photos/seed/${recipe.id}/100/100`;
+            img.alt = recipe.name;
+            img.className = "thumb";
+            imgCol.appendChild(img);
+            row.appendChild(imgCol);
+
+            // Recipe Name
+            const col1 = document.createElement("td");
+            col1.innerText = recipe.name;
+            row.appendChild(col1);
+
+            // Difficulty
+            const col2 = document.createElement("td");
+            col2.innerText = recipe.difficulty;
+            row.appendChild(col2);
+
+            // Cuisine
+            const col3 = document.createElement("td");
+            col3.innerText = recipe.cuisine;
+            row.appendChild(col3);
+
+            // Calories
+            const col4 = document.createElement("td");
+            col4.innerText = recipe.caloriesPerServing;
+            row.appendChild(col4);
+
+            // Rating
+            const col5 = document.createElement("td");
+            col5.innerText = recipe.rating;
+            row.appendChild(col5);
+
+            // Random Price
+            const price = (Math.random() * 50 + 50).toFixed(2); // ₹50 - ₹100
+            const col6 = document.createElement("td");
+            col6.innerText = `₹${price}`;
+            row.appendChild(col6);
+
+            // Add to Cart Button
+            const col7 = document.createElement("td");
+            const btn = document.createElement("button");
+            btn.innerText = "Add to Cart";
+            btn.onclick = () =>
+              addToCart({
+                id: recipe.id,
+                name: recipe.name,
+                price,
+                image: `https://picsum.photos/seed/${recipe.id}/100/100`,
+              });
+            col7.appendChild(btn);
+            row.appendChild(col7);
+
+            document.querySelector("tbody").appendChild(row);
+          });
+        } catch (error) {
+          console.log("ERROR: ", error.message);
+        }
+      };
+
+      const addToCart = (item) => {
+        if (cart.some((c) => c.id === item.id)) {
+          alert("Already in cart!");
+          return;
+        }
+        cart.push(item);
+        renderCart();
+      };
+
+      const removeFromCart = (id) => {
+        const index = cart.findIndex((c) => c.id === id);
+        if (index !== -1) {
+          cart.splice(index, 1);
+          renderCart();
+        }
+      };
+
+      const renderCart = () => {
+        const cartTotal = document.getElementById("cart-total");
+
+        const cartContainer = document.getElementById("cart-items");
+        cartContainer.innerHTML = "";
+        if (cart.length === 0) {
+          cartContainer.innerHTML = "<p>Cart is empty</p>";
+          return;
+        }
+
+        let total = 0;
+        
+        cart.forEach((item) => {
+          // adding the prices
+          total += parseFloat(item.price);
+
+          const div = document.createElement("div");
+          div.className = "cart-item";
+
+          div.innerHTML = `
+            <img src="${item.image}" alt="${item.name}" />
+            <div class="cart-item-details">
+              <strong>${item.name}</strong><br/>
+              Price: ₹${item.price}
+            </div>
+          `;
+
+          const removeBtn = document.createElement("button");
+          removeBtn.className = "remove-btn";
+          removeBtn.innerText = "Remove";
+          removeBtn.onclick = () => removeFromCart(item.id);
+
+          div.appendChild(removeBtn);
+          cartContainer.appendChild(div);
+
+          // Update total price
+          cartTotal.innerHTML = `<strong>Total: ₹${total.toFixed(2)}</strong>`;
+        });
+      };
+
+      getRecipeData();
+    </script>
+  </body>
+</html>
