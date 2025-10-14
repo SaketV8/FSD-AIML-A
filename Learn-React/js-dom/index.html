@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      /* Card container */
+      .card {
+        width: 250px;
+        border: 1px solid #ddd;
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        text-align: center;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        margin: 20px;
+        background-color: #fff;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+
+      /* Hover effect */
+      .card:hover {
+        transform: translateY(-6px);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+      }
+
+      /* Book image */
+      .card-img {
+        width: 100%;
+        height: 250px;
+        object-fit: cover;
+      }
+
+      /* Title */
+      .card-title {
+        font-size: 18px;
+        margin: 10px 0 5px 0;
+        color: #222;
+      }
+
+      /* Price */
+      .card-price {
+        font-size: 16px;
+        color: #666;
+        margin-bottom: 15px;
+      }
+
+      /* Add to Cart button */
+      .card-btn {
+        background-color: #007bff;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        font-size: 15px;
+        cursor: pointer;
+        margin-bottom: 15px;
+        transition: background-color 0.3s ease, transform 0.2s ease;
+      }
+
+      /* Hover effect for button */
+      .card-btn:hover {
+        background-color: #0056b3;
+        transform: scale(1.05);
+      }
+
+      /* Optional: make button full width */
+      .card-btn:active {
+        transform: scale(0.97);
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root"></div>
+    <!-- <div class="card">
+      <img src="https://picsum.photos/250/250?random=1" alt="Book Cover" class="card-img">
+      <h4 class="card-title">Title: Physics</h4>
+      <h4 class="card-price">Price: $300</h4>
+    </div> -->
+
+    <!-- <div class="card">
+      <img
+        src="https://picsum.photos/250/250?random=1"
+        alt="Book Cover"
+        class="card-img"
+      />
+      <h4 class="card-title">Title: Physics</h4>
+      <h4 class="card-price">Price: $300</h4>
+      <button class="card-btn">Add to Cart</button> -->
+    </div>
+
+    <script src="main.js"></script>
+  </body>
+</html>
