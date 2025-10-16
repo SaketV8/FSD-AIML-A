@@ -90,7 +90,8 @@ const createCard = (title, price, imageurl, key) => {
   return React.createElement(
     "div",
     {
-      className: "card", key
+      className: "card",
+      key,
     },
     image,
     h_4,
@@ -143,3 +144,8 @@ const container = React.createElement(
 const parent = document.getElementById("root");
 const root = ReactDOM.createRoot(parent);
 root.render(container);
+
+// ========================================================================================
+// ========================================================================================
+// ========================================================================================
+// ========================================================================================
