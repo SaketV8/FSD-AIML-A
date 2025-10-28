@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      /* === CSS Reset === */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        height: 100%;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background-color: #f5f6fa;
+      }
+
+      /* === Card Container === */
+      .card-container {
+        display: flex;
+        justify-content: flex-start; /* 👈 Align cards from the left */
+        align-items: flex-start;
+        flex-wrap: wrap;
+        gap: 20px;
+        padding: 20px;
+        height: 100vh;
+      }
+
+      /* === Individual Card === */
+      .card {
+        width: 250px;
+        border: 1px solid #ddd;
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        text-align: center;
+        background-color: #fff;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+
+      /* Hover effect for card */
+      .card:hover {
+        transform: translateY(-6px);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+      }
+
+      /* === Card Image === */
+      .card img,
+      .card-img {
+        width: 100%;
+        height: 250px;
+        object-fit: cover;
+      }
+
+      /* === Card Title === */
+      .card h4,
+      .card-title {
+        font-size: 18px;
+        margin: 10px 0 5px 0;
+        color: #222;
+      }
+
+      /* === Card Price === */
+      .card h3,
+      .card-price {
+        font-size: 16px;
+        color: #666;
+        margin-bottom: 15px;
+      }
+
+      /* === Add to Cart Button === */
+      .card-btn {
+        background-color: #007bff;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        font-size: 15px;
+        cursor: pointer;
+        margin-bottom: 15px;
+        transition: background-color 0.3s ease, transform 0.2s ease;
+      }
+
+      /* Hover and active effects for button */
+      .card-btn:hover {
+        background-color: #0056b3;
+        transform: scale(1.05);
+      }
+
+      .card-btn:active {
+        transform: scale(0.97);
+      }
+    </style>
+  </head>
+  <body>
+    <h1 align="center">Book Store</h1>
+    <div id="root"></div>
+
+    <!-- <script
+      crossorigin
+      src="https://unpkg.com/react@18/umd/react.development.js"
+    ></script>
+    <script
+      crossorigin
+      src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"
+    ></script>
+
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script> -->
+
+    <!-- <script src="main.js"></script> -->
+    <!-- <script type="text/babel" src="main.jsx"></script> -->
+    <script type="module" src="index.jsx"></script>
+  </body>
+</html>
