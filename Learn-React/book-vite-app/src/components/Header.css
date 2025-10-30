@@ -1,0 +1,43 @@
+.header-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 20px;
+  padding: 20px;
+  padding-left: 100px;
+  padding-right: 100px;
+  height: 10vh;
+  /* background-color: #babbf1; */
+  background-color: #f5bde6;
+
+  /* border-bottom: 1px dashed #babbf1; */
+  border-bottom: 1px dashed #737994;
+}
+
+.seperator {
+  flex-grow: 1;
+}
+
+/* === Add to Cart Button === */
+.cart-btn {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-size: 15px;
+  cursor: pointer;
+  margin-bottom: 15px;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+/* Hover and active effects for button */
+.cart-btn:hover {
+  background-color: #0056b3;
+  transform: scale(1.05);
+}
+
+.cart-btn:active {
+  transform: scale(0.97);
+}

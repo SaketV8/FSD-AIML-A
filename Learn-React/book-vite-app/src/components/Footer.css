@@ -1,0 +1,15 @@
+.footer-container {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 20px;
+  padding: 20px;
+  height: 10vh;
+  background-color: #babbf1;
+  /* background-color: #f5bde6; */
+}
+
+.footer-text {
+  font-size: large;
+}
